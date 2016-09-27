@@ -76,7 +76,7 @@
       var i = 0;
       for (i; i < vowels.length; i++){
         if(char == vowels[i]){
-            console.log(char,'is a match');
+            // console.log(char,'is a match');
             return true; // will break out, no break statement needed
         }
       }
@@ -89,15 +89,65 @@
   console.assert(isVowel('m') == false);
 
   // ---------------------
-  // Write a function rovarspraket() that will translate a text into "rövarspråket".
-  // That is, double every consonant and place an occurrence of "o" in between.
-  // For example, translate("this is fun") should return the string "tothohisos isos fofunon".
+  // Write a function rovarspraket() that will translate a text into
+  // "rövarspråket". That is, double every consonant and place an occurrence
+  // of "o" in between. For example, translate("this is fun") should return
+  // the string  "tothohisos isos fofunon".
   // ---------------------
 
   function rovarspraket(phrase){
       "use strict";
-      //...
+      // var consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n',
+      //                   'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
+
+      var phraseArray = phrase.split('');
+      var phraseArrayLen = phraseArray.length;
+      // console.log(phraseArray);
+
+      //
+      var spraket = [];
+
+      // loop through phrase
+      for(var i = 0; i < phraseArrayLen ; i++){
+        // assign currentChar to value current char index
+        var currentChar = phraseArray[i];
+        // use isVowel() to determine if currentChar is a vowel or not
+        if(isVowel(currentChar)){
+          spraket.push(currentChar);
+        } else if (currentChar == ' '){
+          // leave spaces alone and push them up
+          spraket.push(currentChar);
+        } else {
+          // double up on currentChar and put 'o' inbetween
+          var encodedChar = currentChar + 'o' + currentChar;
+          spraket.push(encodedChar);
+        }
+
+        // loop through consonants to find a match
+        // this didnt work out so well...
+        // for(var j = 0; j < consonants.length; j++){
+        //   // assign current consonant to current consonant index
+        //   var currentConsonant = consonants[j];
+        //   // if currentChar finds a match
+        //   if(currentChar == currentConsonant){
+        //      var encodedChar = currentChar + 'o' + currentChar;
+        //      spraket.push(encodedChar);
+        //   } else {
+        //     spraket.push(currentChar);
+        //   }
+        //
+        // }
+
+      }
+
+      var newPhrase = spraket.join('');
+
+      return newPhrase;
+
   }
+
+  console.assert(rovarspraket('fun fun function') == 'fofunon fofunon fofunoncoctotionon')
+  console.assert(rovarspraket('taco bell is awesome') == 'totacoco bobelollol isos awowesosomome');
 
   // ---------------------
   // Define a function sum() and a function multiply() that sums and multiplies
@@ -107,7 +157,7 @@
 
   function sum(){
       "use strict";
-      //...
+      
   }
 
   function multiply(){

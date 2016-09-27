@@ -69,8 +69,24 @@
 
   function isVowel(char){
       "use strict";
-      //...
+
+      var char = char.toLowerCase(); // handle loud letters
+      var vowels = ['a', 'e', 'i', 'o', 'u'];
+
+      var i = 0;
+      for (i; i < vowels.length; i++){
+        if(char == vowels[i]){
+            console.log(char,'is a match');
+            return true; // will break out, no break statement needed
+        }
+      }
+
+      return false;
+
   }
+
+  console.assert(isVowel('E') == true);
+  console.assert(isVowel('m') == false);
 
   // ---------------------
   // Write a function rovarspraket() that will translate a text into "rövarspråket".

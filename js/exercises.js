@@ -250,9 +250,10 @@
 
     return longWords;
   }
+  console.assert(filterLongWords(['John', 'hammer', 'toothbrush', 'pen'], 5).length == 2);
 
-  console.assert(isEquivalent(filterLongWords(['John', 'hammer', 'toothbrush', 'pen'], 5), ['hammer', 'toothbrush'])); // returns false
-  console.assert(isEquivalent(filterLongWords(['sandwich', 'screwdriver', 'toilet', 'beer'], 7), ['sandwich', 'screwdriver'])); // returns false
+  console.assert(isEquivalent(filterLongWords(['John', 'hammer', 'toothbrush', 'pen'], 5), ['hammer', 'toothbrush']));
+  console.assert(isEquivalent(filterLongWords(['sandwich', 'screwdriver', 'toilet', 'beer'], 7), ['sandwich', 'screwdriver']));
 
   // ---------------------
   // Write a function charFreq() that takes a string and builds a frequency

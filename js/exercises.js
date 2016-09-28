@@ -155,25 +155,55 @@
   // sum([1,2,3,4]) should return 10, and multiply([1,2,3,4]) should return 24.
   // ---------------------
 
-  function sum(){
-      "use strict";
-      
+  function sum(numArray){
+    "use strict";
+    // console.log(numbers.length) // 4
+    var result = 0; // start at 0 for addition
+
+    for(var i = 0; i < numArray.length; i++){
+      var currentNum = numArray[i];
+      result += currentNum;
+    }
+
+    return result;
   }
 
-  function multiply(){
-      "use strict";
-      //...
+  console.assert(sum([1,2,3,4]) == 10);
+  console.assert(sum([2,4,6,8]) == 20);
+
+  function multiply(numArray){
+    "use strict";
+    var result = 1; // start at 1 for multiplication
+
+    for(var i = 0; i < numArray.length; i++){
+      var currentNum = numArray[i];
+      result *= currentNum;
+    }
+
+    return result;
   }
+
+  console.assert(multiply([1,2,3,4]) == 24);
+  console.assert(multiply([2,4,6,8]) == 384);
 
   // ---------------------
   // Define a function reverse() that computes the reversal of a string. For
   // example, reverse("jag testar") should return the string "ratset gaj".
   // ---------------------
 
-  function reverse(){
-      "use strict";
-      //...
+  function reverse(str){
+    "use strict";
+
+    var strArray = str.split('');
+    var reversedArray = strArray.reverse();
+    var reverseStr = reversedArray.join('');
+
+    return reverseStr;
+
   }
+
+  console.assert(reverse('jag testar') == 'ratset gaj');
+  console.assert(reverse('beer run') == 'nur reeb');
 
   // ---------------------
   // Write a function findLongestWord() that takes an array of words and returns
@@ -181,9 +211,24 @@
   // ---------------------
 
   function findLongestWord(words){
-      "use strict";
-      //...
+    "use strict";
+    var longestLength = 0;
+
+    for(var i = 0; i < words.length; i++){
+      var currentWord = words[i];
+      var currentWordLen = currentWord.length
+      // console.log(currentWord, currentWord.length);
+      if (currentWordLen > longestLength){
+        longestLength = currentWordLen;
+        // console.log(longestLength);
+      }
+    }
+
+    return longestLength;
   }
+
+  console.assert(findLongestWord(['John', 'hammer', 'toothbrush', 'pen']) == 10);
+  console.assert(findLongestWord(['sandwich', 'screwdriver', 'toilet', 'beer']) == 11);
 
   // ---------------------
   // Write a function filterLongWords() that takes an array of words and an
@@ -191,9 +236,23 @@
   // ---------------------
 
   function filterLongWords(words, i){
-      "use strict";
-      //...
+    "use strict";
+    var longWords = [];
+
+    for(var j = 0; j < words.length; j++){
+      var word = words[j];
+
+      if(word.length > i) {
+        longWords.push(word);
+      }
+    }
+    // console.log(longWords);
+
+    return longWords;
   }
+
+  console.assert(isEquivalent(filterLongWords(['John', 'hammer', 'toothbrush', 'pen'], 5), ['hammer', 'toothbrush'])); // returns false
+  console.assert(isEquivalent(filterLongWords(['sandwich', 'screwdriver', 'toilet', 'beer'], 7), ['sandwich', 'screwdriver'])); // returns false
 
   // ---------------------
   // Write a function charFreq() that takes a string and builds a frequency
@@ -203,10 +262,60 @@
   // ---------------------
 
   function charFreq(string){
-      "use strict";
-      //...
+    "use strict";
+    var strToLower = string.toLowerCase();
+    // console.log(strLower);
+
+    var charsTotal = {};
+
+    for(var i = 0; i < strToLower.length; i++){
+      var char = strToLower[i];
+      // console.log(char);
+      // add to charsTotal object
+
+      if(charsTotal.hasOwnProperty(char)){
+        charsTotal[char] += 1;
+      } else {
+        charsTotal[char] = 1;
+      }
+
+    }
+
+    // console.log(charsTotal);
+    return charsTotal;
+
   }
 
+  console.assert(isEquivalent(charFreq('abbabcbdbabdbdbabababcbcbab'), {'a': 7, 'b': 14, 'c': 3, 'd': 3}));
+  console.assert(isEquivalent(charFreq('I like lifting living things'), {" ": 4, 'e': 1, 'f': 1, 'g': 3, 'h': 1, 'i': 7, 'k': 1, 'l': 3, 'n': 3, 's': 1 ,'t': 2, 'v': 1}));
 
+  // needed a way to check object equality since console.assert() doesnt seem
+  // to sort out if the object or array returned is equal - pulled from:
+  // http://adripofjavascript.com/blog/drips/object-equality-in-javascript.html
+  function isEquivalent(a, b) {
+    // Create arrays of property names
+    var aProps = Object.getOwnPropertyNames(a);
+    var bProps = Object.getOwnPropertyNames(b);
+
+    // If number of properties is different,
+    // objects are not equivalent
+    if (aProps.length != bProps.length) {
+        return false;
+    }
+
+    for (var i = 0; i < aProps.length; i++) {
+        var propName = aProps[i];
+
+        // If values of same property are not equal,
+        // objects are not equivalent
+        if (a[propName] !== b[propName]) {
+            return false;
+        }
+    }
+
+    // If we made it this far, objects
+    // are considered equivalent
+    return true;
+}
 
 }());

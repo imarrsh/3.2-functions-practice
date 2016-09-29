@@ -69,19 +69,19 @@
 
   function isVowel(char){
       "use strict";
-
       var char = char.toLowerCase(); // handle loud letters
-      var vowels = ['a', 'e', 'i', 'o', 'u'];
-
-      var i = 0;
-      for (i; i < vowels.length; i++){
-        if(char == vowels[i]){
-            // console.log(char,'is a match');
-            return true; // will break out, no break statement needed
-        }
-      }
-
-      return false;
+      // var vowels = ['a', 'e', 'i', 'o', 'u'];
+      //
+      // var i = 0;
+      // for (i; i < vowels.length; i++){
+      //   if(char == vowels[i]){
+      //       // console.log(char,'is a match');
+      //       return true; // will break out, no break statement needed
+      //   }
+      // }
+      //
+      // return false;
+      return 'aeiou'.indexOf(char) !== -1; // so elegant one line... 
 
   }
 
@@ -273,7 +273,7 @@
       var char = strToLower[i];
       // console.log(char);
       // add to charsTotal object
-
+      // if(charsTotal[char]) { // <-- in class demo solution
       if(charsTotal.hasOwnProperty(char)){
         charsTotal[char] += 1;
       } else {
@@ -286,6 +286,12 @@
     return charsTotal;
 
   }
+
+  var frequency = charFreq('abbabcbdbabdbdbabababcbcbab');
+
+  // console.assert(frequency === {'a': 7, 'b': 14, 'c': 3, 'd': 3});
+  console.log(frequency);
+
 
   console.assert(isEquivalent(charFreq('abbabcbdbabdbdbabababcbcbab'), {'a': 7, 'b': 14, 'c': 3, 'd': 3}));
   console.assert(isEquivalent(charFreq('I like lifting living things'), {" ": 4, 'e': 1, 'f': 1, 'g': 3, 'h': 1, 'i': 7, 'k': 1, 'l': 3, 'n': 3, 's': 1 ,'t': 2, 'v': 1}));
